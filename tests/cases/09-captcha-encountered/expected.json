@@ -1,0 +1,8 @@
+{
+  "decision": "MATCH",
+  "submit_allowed": false,
+  "reasons": [
+    "security_challenge"
+  ],
+  "must_not_claim": []
+}

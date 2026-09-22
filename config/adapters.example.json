@@ -1,0 +1,7 @@
+{
+  "job_source": "FileJobSource",
+  "application_provider": "DryRunApplicationProvider",
+  "candidate_store": "LocalCandidateStore",
+  "tracker": "CSVTracker",
+  "notifications": "ConsoleNotification"
+}

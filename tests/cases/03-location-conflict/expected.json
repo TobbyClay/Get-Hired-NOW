@@ -1,0 +1,8 @@
+{
+  "decision": "HUMAN_REQUIRED",
+  "submit_allowed": false,
+  "reasons": [
+    "location_conflict"
+  ],
+  "must_not_claim": []
+}

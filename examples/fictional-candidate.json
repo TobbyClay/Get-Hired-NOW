@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "display_name": "Fictional Candidate",
+  "location": "FICTIONAL-REGION",
+  "target_roles": [
+    "Example Engineer"
+  ],
+  "salary": {
+    "minimum": 100,
+    "currency": "TOK",
+    "period": "year",
+    "basis": "gross_base"
+  },
+  "constraints": [],
+  "facts": {
+    "sample_tool_years": {
+      "value": 3,
+      "status": "confirmed",
+      "source": "fictional:user-supplied-example"
+    },
+    "contact_email": {
+      "value": "candidate@example.com",
+      "status": "confirmed",
+      "source": "fictional:user-supplied-example"
+    }
+  }
+}

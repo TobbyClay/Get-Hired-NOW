@@ -1,0 +1,7 @@
+{
+  "strategy": "evidence_gates",
+  "required_unknown": "HUMAN_REQUIRED",
+  "required_contradicted": "REJECT",
+  "preferred_unknown": "nonblocking",
+  "note": "Describes the implemented evaluator. Weighted ranking is an adapter extension."
+}

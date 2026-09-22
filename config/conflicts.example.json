@@ -1,0 +1,6 @@
+{
+  "constraints": [
+    "<OPTIONAL_USER_SUPPLIED_CONSTRAINT>"
+  ],
+  "note": "No employer, geography, salary or personal restrictions are preloaded."
+}

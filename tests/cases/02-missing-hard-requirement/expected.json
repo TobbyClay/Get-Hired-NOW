@@ -1,0 +1,10 @@
+{
+  "decision": "REJECT",
+  "submit_allowed": false,
+  "reasons": [
+    "missing_hard_requirement"
+  ],
+  "must_not_claim": [
+    "sample_tool_years"
+  ]
+}

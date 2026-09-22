@@ -1,0 +1,88 @@
+{
+  "candidate": {
+    "schema_version": 1,
+    "display_name": "Fictional Candidate",
+    "location": "FICTIONAL-REGION",
+    "target_roles": [
+      "Example Engineer"
+    ],
+    "salary": {
+      "minimum": 100,
+      "currency": "TOK",
+      "period": "year",
+      "basis": "gross_base"
+    },
+    "constraints": [],
+    "facts": {
+      "sample_tool_years": {
+        "value": 3,
+        "status": "confirmed",
+        "source": "fictional:user-supplied-example"
+      },
+      "contact_email": {
+        "value": "candidate@example.com",
+        "status": "confirmed",
+        "source": "fictional:user-supplied-example"
+      }
+    }
+  },
+  "job": {
+    "schema_version": 1,
+    "employer": "Fictional Example Company",
+    "title": "Example Engineer",
+    "requisition_id": "FICTIONAL-001",
+    "url": "https://jobs.example.com/fictional-001",
+    "observed_at": "2026-01-01T00:00:00Z",
+    "locations": [
+      "FICTIONAL-REGION"
+    ],
+    "salary": {
+      "maximum": 200,
+      "currency": "TOK",
+      "period": "year",
+      "basis": "gross_base"
+    },
+    "requirements": [
+      {
+        "fact": "sample_tool_years",
+        "op": "gte",
+        "value": 2,
+        "kind": "required",
+        "quote": "Fictional requirement: two years using Example Tool.",
+        "source": "https://jobs.example.com/fictional-001"
+      }
+    ],
+    "questions": [
+      {
+        "id": "contact",
+        "text": "Contact email",
+        "fact": "contact_email",
+        "kind": "fact",
+        "required": true
+      }
+    ]
+  },
+  "policy": {
+    "schema_version": 1,
+    "mode": "AUTONOMOUS",
+    "auto_submit": true,
+    "allowed_actions": [
+      "submit"
+    ]
+  },
+  "form": {
+    "job_key": "d7af2c46f1057a9dd0eacd2c64904d4eee7a49b3bfacef3717f3da4d3ac92731",
+    "complete": true,
+    "security_challenge": false,
+    "questions": [
+      {
+        "id": "contact",
+        "text": "Contact email",
+        "fact": "contact_email",
+        "kind": "fact",
+        "required": true
+      }
+    ]
+  },
+  "duplicate": true
+}

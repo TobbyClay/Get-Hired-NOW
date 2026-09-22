@@ -1,0 +1,10 @@
+{
+  "decision": "HUMAN_REQUIRED",
+  "submit_allowed": false,
+  "reasons": [
+    "conflicting_candidate_fact"
+  ],
+  "must_not_claim": [
+    "sample_tool_years"
+  ]
+}

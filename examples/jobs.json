@@ -1,0 +1,38 @@
+[
+  {
+    "schema_version": 1,
+    "employer": "Fictional Example Company",
+    "title": "Example Engineer",
+    "requisition_id": "FICTIONAL-001",
+    "url": "https://jobs.example.com/fictional-001",
+    "observed_at": "2026-01-01T00:00:00Z",
+    "locations": [
+      "FICTIONAL-REGION"
+    ],
+    "salary": {
+      "maximum": 200,
+      "currency": "TOK",
+      "period": "year",
+      "basis": "gross_base"
+    },
+    "requirements": [
+      {
+        "fact": "sample_tool_years",
+        "op": "gte",
+        "value": 2,
+        "kind": "required",
+        "quote": "Fictional requirement: two years using Example Tool.",
+        "source": "https://jobs.example.com/fictional-001"
+      }
+    ],
+    "questions": [
+      {
+        "id": "contact",
+        "text": "Contact email",
+        "fact": "contact_email",
+        "kind": "fact",
+        "required": true
+      }
+    ]
+  }
+]

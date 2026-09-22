@@ -1,0 +1,6 @@
+{
+  "target_roles": [
+    "<SUPPLIED_DURING_SETUP>"
+  ],
+  "note": "Source filters derive from the private candidate profile; this file is a reference only."
+}

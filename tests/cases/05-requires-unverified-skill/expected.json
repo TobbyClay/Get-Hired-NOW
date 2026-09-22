@@ -1,0 +1,10 @@
+{
+  "decision": "HUMAN_REQUIRED",
+  "submit_allowed": false,
+  "reasons": [
+    "unverified_skill"
+  ],
+  "must_not_claim": [
+    "sample_tool_years"
+  ]
+}
