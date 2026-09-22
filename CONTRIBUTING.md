@@ -1,9 +1,13 @@
 # Contributing
 
+The installable skill in skills/get-hired-now is the primary product. Keep it
+self-contained and use the host AI's real tools. The Python package is an optional
+developer reference, not a prerequisite for users.
+
 Keep contributions small and grounded in an observable workflow behavior. Include
 a fictional regression case for permission, evidence, state or adapter changes.
 
-Run the unittest suite, offline demo, privacy scan and `git diff --check`. CI uses
+Run the unittest suite, skill package checks, privacy scan and `git diff --check`. CI uses
 Python 3.10 and 3.13 on Linux and Windows. The runtime uses only the standard library.
 
 Do not attach real resumes, receipts, candidate transcripts, tokens, personal

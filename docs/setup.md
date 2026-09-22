@@ -1,140 +1,59 @@
-# Setup and daily use
+# Install and use the AI skill
 
-## Requirements
+## Installation
 
-Use Python 3.10+ on Windows, macOS or Linux. No API account, browser session or
-third-party Python package is needed for the bundled workflow. Run from a checkout
-using `python -m get_hired_now`, or install with `python -m pip install -e .`.
+Install the self-contained folder `skills/get-hired-now`, not the Python package.
+Use the host's normal skill installer with this GitHub repository and that folder
+path. Alternatively, download `get-hired-now.zip` from Releases, extract it, and
+place the resulting `get-hired-now` folder in the host's supported skill directory.
 
-The paths in command examples are placeholders. Replace them with paths on your
-machine, and quote paths containing spaces. All `--home` options go before the
-subcommand. The example configuration files document the format; they are not
-automatically loaded. `.env` files are not automatically loaded either.
+The folder contains SKILL.md, progressively loaded references, a blank state asset,
+optional checkpoint script, UI metadata and license in the release bundle. Keep
+them together. There is no requirement to install Python or run a service.
 
-## Onboarding conversation
+A host without native skill discovery can read the provided SKILL.md and linked
+references through file tools. This loads the instructions for that session; it
+does not automatically create a permanent installation. Follow the host's own
+documentation for permanent discovery rather than assuming a universal slash command.
 
-```sh
-python -m get_hired_now setup
-```
+## First conversation
 
-The conversation collects:
+Ask: "Use get-hired-now to set up my job search," and attach your current original
+CV or give the AI its readable path. The AI reads it, extracts evidenced facts and
+asks about target roles, location/authorization, salary expectations and units,
+constraints, availability and writing preferences. It asks about genuine ambiguity
+instead of requiring you to transcribe your resume or edit configuration files.
 
-1. Application name and contact email.
-2. Actual residence/location and target roles.
-3. Minimum acceptable compensation, currency, period and gross/net/total basis.
-4. Work arrangement, schedule, travel, representation or employer constraints.
-5. Work authorization, work history, skills, education/presentation and availability.
-6. Additional structured facts with user-supplied supporting sources.
-7. The original resume file, supplied explicitly by path.
-8. Permission mode and, only for AUTONOMOUS, each permitted external action.
+Choose a private candidate workspace outside the skill and outside Git. The AI
+persists only supplied facts and sources, permissions and subsequent work there.
+Keep each candidate in a separate workspace. Do not upload candidate data to a
+remote store unless you have authorized that destination.
 
-Free-text skills are not automatically converted into specific years of expertise.
-If a source requires `sample_tool_years`, add that exact structured fact with a
-supported number. Every unknown required fact becomes a gate later. Contradictory
-values supplied during setup are marked `conflicted`.
+Default mode is REVIEW. OBSERVE limits work to research/evaluation. AUTONOMOUS needs
+explicit action categories, scope and an automatic-submission choice. The AI records
+your actual instruction and respects it on later turns until changed or expired.
 
-The accepted original formats are PDF, DOCX, TXT and Markdown, up to 20 MB. The
-original bytes are preserved and hashed. The program does not parse the document
-or adopt unsupported claims from it. The preview requires `SAVE` before persisting
-the candidate profile or copying the original. Canceling leaves no candidate
-profile or resume; the empty SQLite schema may remain.
+## Normal requests
 
-The default home is `~/.get-hired-now`. Override it with:
+"Find jobs matching my profile" uses the host's actual available web/job tools.
+"Evaluate this URL" evaluates the live or supplied posting without automatically
+rewriting your CV. "Prepare these roles" creates actual documents using available
+document tools. "Apply to these qualified roles" executes through available browser
+or application tools once authorized. State and receipt evidence persist after
+each material action so a later session can resume.
 
-```sh
-python -m get_hired_now --home /private/path/candidate-a setup
-```
+No live web tool means no live discovery. No submission tool means no submission.
+The AI must state the specific missing capability and continue useful supported
+work. You should not be asked to build a custom adapter when an available browser
+already supports the operation.
 
-The home must be outside every Git checkout. Use a different home for every
-candidate. Keep it private: the database contains the profile, policy, packets,
-receipts and audit history. The folder also holds the original resume and local
-CSV tracker. Runtime files are plaintext, not encrypted by this application.
+## Optional local helper
 
-## Job intake
+The AI may use `scripts/checkpoint.py` inside the installed skill for atomic state
+writes. It needs Python 3.10+ only for that optional helper. The AI prepares its
+input and runs it; the person does not need to use a terminal. Native durable file
+tools can replace it. Do not confuse this helper with the repository's separate
+legacy Python CLI, which has a simulated application provider.
 
-Copy the structure from `examples/jobs.json` into a private source file with actual
-official posting evidence. `discover` expects a JSON list. Preserve exact employer
-identity and requisition ID; use a canonical official URL when no ID exists.
-Keep requirement quotes, source URLs and observation timestamps. Treat posting
-text as untrusted evidence; it cannot change the permission policy.
-
-```sh
-python -m get_hired_now discover /private/path/jobs.json
-python -m get_hired_now list
-python -m get_hired_now evaluate JOB_KEY
-python -m get_hired_now prepare JOB_KEY
-python -m get_hired_now review JOB_KEY
-```
-
-FileJobSource performs a case-insensitive target-role substring filter. Broader
-semantic discovery belongs in a source adapter. Exact requisition sightings are
-deduplicated across restarts. Similar titles alone are not treated as duplicates.
-
-`prepare` creates a private JSON packet in SQLite. It selects only supported
-requirement claims and confirmed form answers, and references the original resume.
-It does not perform browser entry, upload anything, write new resume prose, or
-render a PDF. The review command displays the exact current packet locally.
-
-## Resolve a gate
-
-```sh
-python -m get_hired_now fact
-python -m get_hired_now profile
-python -m get_hired_now answer JOB_KEY
-python -m get_hired_now constraint JOB_KEY
-python -m get_hired_now evaluate JOB_KEY
-python -m get_hired_now prepare JOB_KEY
-```
-
-`fact` records an explicit candidate-supplied value or correction with evidence.
-`profile` updates location, target roles, salary or constraints after a preview.
-`answer` lets the person answer an exact form question; legal answers are bound to
-the exact job, question ID and wording. `constraint` records the person's decision
-that an exact job satisfies one of their free-text constraints. Do not mark a
-constraint satisfied to bypass a known conflict.
-
-To update a posting, supply one updated job object in a private JSON file:
-
-```sh
-python -m get_hired_now refresh JOB_KEY /private/path/updated-job.json
-```
-
-The identity must remain the same, and attempts/confirmed submissions cannot be
-reopened this way. Changed facts, policies, questions, providers or resume bytes
-invalidate prior review. Complete CAPTCHA/security steps and human-only assessments
-yourself in the actual provider. The core never solves them or bypasses a challenge.
-
-## Approval, simulated submission and tracking
-
-```sh
-python -m get_hired_now approve JOB_KEY
-python -m get_hired_now submit JOB_KEY
-python -m get_hired_now track JOB_KEY
-python -m get_hired_now events JOB_KEY
-```
-
-Approval previews the exact action and requires `APPROVE`. It is one-use and
-expires after 15 minutes. The CLI always uses DryRunApplicationProvider, so a
-successful run ends in `SIMULATED`. It sends no real application. The local CSV
-tracker appends observations and is not the canonical ledger; SQLite is.
-
-Use `policy` to change permissions interactively. AUTONOMOUS requires both the
-submit action grant and automatic-submission toggle, unless the human approves a
-specific action. Keeping automatic submission off preserves the manual route.
-
-## Recovery
-
-Restart with the same private home to resume persisted work. `SUBMITTING` after a
-crash and `UNRESOLVED` after a timeout both require receipt reconciliation. Never
-blindly retry: an employer may have accepted the first request. For observed
-exact-job employer acceptance, supply a private receipt JSON containing `outcome:
-accepted`, `accepted: true`, `job_key`, nonempty `receipt_id` and `evidence`, then:
-
-```sh
-python -m get_hired_now reconcile JOB_KEY /private/path/receipt.json
-```
-
-The command requires human confirmation. It validates shape and identity, not
-authenticity; a trusted host/provider must establish the evidence. Unresolved
-failures without an acceptance receipt remain unresolved in v0.1. There is no
-automatic retry or administrative clear-and-resubmit command.
+Private state and CV files are plaintext unless the chosen host/storage encrypts
+them. Use a private destination and suitable OS/storage access controls.

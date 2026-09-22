@@ -1,13 +1,6 @@
-# Follow-up workflow
+# Follow-up
 
-Inspect the current stored exact-job outcome and supplied employer communications.
-Distinguish an application receipt from interview interest, hiring rejection and
-unresolved delivery. Preserve original receipt evidence and submitted material.
-
-Draft the smallest useful next message from confirmed facts. Ask for missing
-information through the trusted human interface. Do not infer recipients or
-schedule/send a message from submission permission alone.
-
-The ledger has FOLLOW_UP as a state. Delivery and scheduling require separately
-implemented and explicitly authorized host extensions; no recurring service is
-installed by this repository.
+Use the skill's [tracking and outreach instructions](../skills/get-hired-now/references/tracking.md).
+Keep exact-job receipts and supplied candidate facts authoritative. Drafting and
+sending are separate scopes; only actual authorized host-tool execution counts as
+a sent message or scheduled monitor.

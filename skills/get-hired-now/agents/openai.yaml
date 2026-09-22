@@ -1,0 +1,4 @@
+interface:
+  display_name: "Get-Hired-NOW"
+  short_description: "Run a grounded job search with your AI tools"
+  default_prompt: "Use $get-hired-now to help me find suitable jobs, tailor my resume, and handle applications within my chosen permissions."
