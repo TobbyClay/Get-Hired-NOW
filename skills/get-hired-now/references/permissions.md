@@ -15,6 +15,10 @@ application submission also requires `auto_submit: true`; false means prepare an
 seek exact approval. Standing authorization must name real scope (for example,
 qualified roles matching saved targets in this batch), not unrestricted authority.
 Separate `application`, `tracker`, `notify`, `outreach` and `schedule` grants.
+Also record inbox/code, account/profile and interview/calendar scope when used.
+Standing application authorization covers the ordinary reviewed contact-data,
+resume upload and Submit actions included in that instruction; it does not silently
+authorize a new account, unrelated messages or another person's signed-in session.
 
 ## Decision order
 
@@ -27,7 +31,9 @@ Separate `application`, `tracker`, `notify`, `outreach` and `schedule` grants.
 5. In AUTONOMOUS, verify the action's grant, current scope and auto-submit switch;
    otherwise use a specific human approval. Do not reinterpret a missing grant.
 6. Persist a unique action/attempt ID and `SUBMITTING` before transmitting data.
-   Consume the exact approval when starting. A crash/timeout remains unresolved.
+   Bind the exact approval to that action when starting. A crash/timeout remains
+   unresolved; do not replay it. Standing grants remain scoped rather than consumed
+   as if each ordinary application needed a new approval.
 7. Record the actual response and evidence. Only exact-role employer acceptance
    permits `SUBMITTED`; other outcomes retain their real failure/uncertainty.
 
@@ -54,11 +60,14 @@ Store action ID/category, job key, destination, candidate revision, posting/form
 version, hashes or immutable versions of artifacts, exact action preview, the
 user-message reference, granted time and expiry. If the host exposes no message ID,
 quote the actual instruction with its observed time/context; never invent an ID.
-Default a one-off approval to
-15 minutes; use the person's explicitly stated duration if supplied. Record
+Use the person's stated duration or the host's actual expiry policy. If neither
+sets an expiry, record it as unspecified and revalidate payload/scope rather than
+inventing a short timeout that repeatedly asks for permission. Record
 standing scope separately rather than pretending it is a perpetually fresh exact
 approval. A material change requires a new decision or renewed approval.
 
 The person can withdraw authorization at any time. Save the change immediately
 and stop pending affected actions. The model must never fabricate the user-message
 reference, authorize itself, or mark a hard gate resolved without actual evidence.
+Latest explicit corrections and withdrawals override historical permission notes.
+A saved automation prompt is not permission to revive a superseded candidate policy.

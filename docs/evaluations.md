@@ -9,6 +9,15 @@ Validate SKILL.md frontmatter, reference closure and installable ZIP contents.
 Extract the ZIP into an isolated directory and run its optional checkpoint helper
 without importing the repository's Python package. Test atomic revision checks,
 duplicate writers, missing acceptance evidence and preservation of receipts.
+Also test immutable attempt reservations, candidate-workspace binding, batch identity
+deduplication, wrong-role receipts, late reconciliation, upload versus final Submit,
+pre-submit blockers and unknown/invalid time denominators. The report helper tests
+record projection, not authenticity of an employer response or quality of a CV.
+
+For a revised pipeline exercise, use fictional raw inputs with cross-source mirrors,
+an uncertain prior submit, conflicting original/repost dates, missing required
+answers, unknown pay and supported adjacent responsibilities. Observe actual local
+files and decisions. Do not show the evaluating AI this expected-behavior checklist.
 
 For behavioral forward-testing, give an independent AI the installed skill, a
 realistic user request and fictional raw documents/posting evidence. Do not supply
@@ -24,6 +33,17 @@ and a durable checkpoint without importing the legacy framework. It reported zer
 live-verification or submission actions. Ambiguities about local preparation versus
 form readiness, unspecified formats and message identifiers were used to clarify
 the skill. This exercise does not certify live board/browser compatibility.
+
+For the v0.3 pipeline update, an independent file-only exercise reviewed five
+fictional sightings representing four exact roles. It produced one fresh editable
+resume with a sourced answer map, final-content QA, hashes and a durable checkpoint.
+It merged the mirror sighting, used original publication rather than a refresh,
+kept an uncertain prior submission unresolved without retry, treated preferred
+qualification gaps truthfully, and left a personal recording and prohibited-AI
+exercise to the candidate. Missing live access and eligibility stayed explicit:
+zero live screens, new submissions or confirmations, and zero submission-ready
+packets. The original inputs were preserved. This validates local preparation and
+queue decisions within that exercise, not live ATS compatibility or hiring results.
 
 ## Ten regression scenarios
 

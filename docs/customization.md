@@ -25,6 +25,13 @@ Updates come from the person with provenance. Unpublished employer pay is unknow
 not an automatic rejection; use the person's undisclosed-pay policy and appropriate
 preparation investment.
 
+Configure source/family coverage, original-publication policy, time budgets and goals
+with provenance in the private search policy. No numeric application goal, posting-
+age maximum, market, pay floor or model roster is imposed on every candidate.
+Distinguish a goal from an explicit cap and use the [round contract](../skills/get-hired-now/references/rounds.md)
+for streaming, early form checks, carryover and measurements. Compensation research
+uses the [salary contract](../skills/get-hired-now/references/salary.md).
+
 ## Agent hosts
 
 Follow the portable team contract. Use one AI sequentially or supported, authorized

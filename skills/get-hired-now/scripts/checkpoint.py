@@ -46,6 +46,12 @@ def validate(value, previous=None):
             raise ValueError(f"Invalid {key}")
     if "candidate" not in value or (value["candidate"] is not None and not isinstance(value["candidate"], dict)):
         raise ValueError("Candidate must be null or an explicitly supplied profile")
+    candidate_id = value.get("candidate_id")
+    if candidate_id is not None and (not isinstance(candidate_id, str) or not candidate_id.strip()):
+        raise ValueError("Candidate identifier must be a nonempty string or null")
+    for key in ("search_policy", "rounds"):
+        if key in value and not isinstance(value[key], dict):
+            raise ValueError(f"Invalid {key}")
     policy = value["permissions"]
     if policy.get("mode") not in {"OBSERVE", "REVIEW", "AUTONOMOUS"} or type(policy.get("auto_submit")) is not bool:
         raise ValueError("Invalid permission mode or auto_submit type")
@@ -56,6 +62,12 @@ def validate(value, previous=None):
     for key, job in value["jobs"].items():
         if not isinstance(job, dict) or job.get("stage") not in STAGES:
             raise ValueError("Invalid job stage")
+        attempts = job.get("attempts", [])
+        if not isinstance(attempts, list) or any(not isinstance(a, dict) or not isinstance(a.get("id"), str)
+                                               or not a["id"] for a in attempts):
+            raise ValueError("Attempts require explicit identifiers")
+        if len({a["id"] for a in attempts}) != len(attempts):
+            raise ValueError("Attempt identifiers must be unique within a job")
         if job["stage"] in {"SUBMITTING", "UNRESOLVED"} and not job.get("attempts"):
             raise ValueError("An attempted application needs a durable attempt record")
         if job["stage"] in {"SUBMITTED", "FOLLOW_UP"}:
@@ -64,12 +76,19 @@ def validate(value, previous=None):
                        and r.get("evidence") for r in receipts):
                 raise ValueError("Confirmed submission requires exact-job acceptance evidence")
     if previous:
+        if previous.get("candidate_id") is not None and value.get("candidate_id") != previous["candidate_id"]:
+            raise ValueError("A candidate workspace cannot be reassigned to another candidate")
         if value["events"][:len(previous["events"])] != previous["events"]:
             raise ValueError("Existing audit events must be preserved")
         for key, job in previous["jobs"].items():
             replacement = value["jobs"].get(key)
             if replacement is None:
                 raise ValueError("Existing jobs must be retained")
+            for attempt in job.get("attempts", []):
+                if attempt not in replacement.get("attempts", []):
+                    raise ValueError("Existing attempt reservations must be preserved")
+            if job["stage"] in {"SUBMITTING", "UNRESOLVED"} and replacement.get("attempts", []) != job.get("attempts", []):
+                raise ValueError("An unresolved application cannot start another attempt")
             for receipt in job.get("receipts", []):
                 if receipt not in replacement.get("receipts", []):
                     raise ValueError("Existing receipts must be preserved")

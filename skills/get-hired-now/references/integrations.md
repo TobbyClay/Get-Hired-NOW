@@ -32,6 +32,13 @@ Adapt these fields to real host names; never store credentials. Tool changes req
 rechecking the binding. Account/destination changes invalidate affected approvals.
 No capability implies permission: an available mail tool does not authorize sending.
 
+Verify signed-in account identity for candidate-specific actions and keep candidates
+separate. Use public discovery with supported status/date/geography filters; check
+tool documentation and inspect results rather than assuming a filter name works.
+Public discovery services receive search criteria, not resumes, private facts,
+answers, application codes or secrets. Personalized matching, external tracking
+and inbox access require their own correct-candidate binding and authorized scope.
+
 ## Operational boundary
 
 Read-only public inspection must not enter candidate data, upload a file, request

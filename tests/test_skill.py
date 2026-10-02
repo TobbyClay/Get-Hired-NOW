@@ -43,6 +43,19 @@ class SkillBundleTests(unittest.TestCase):
                             "--input", str(proposal), "--expected-revision", "0"],
                            cwd=root, capture_output=True, text=True, check=True)
             self.assertEqual(json.loads((private / "state.json").read_text())["revision"], 1)
+            value = json.loads((private / "state.json").read_text())
+            value["rounds"] = {"fictional-batch": {"elapsed_seconds": 60, "active_seconds": None}}
+            proposal.write_text(json.dumps(value))
+            subprocess.run([sys.executable, "-I", str(script), "save", "--workspace", str(private),
+                            "--input", str(proposal), "--expected-revision", "1"],
+                           cwd=root, capture_output=True, text=True, check=True)
+            reporter = script.with_name("round_report.py")
+            before = (private / "state.json").read_bytes()
+            result = subprocess.run([sys.executable, "-I", str(reporter), "--workspace", str(private),
+                                     "--batch", "fictional-batch"], cwd=root, capture_output=True,
+                                    text=True, check=True)
+            self.assertEqual(json.loads(result.stdout)["counts"]["confirmed"], 0)
+            self.assertEqual((private / "state.json").read_bytes(), before)
 
     def test_all_linked_skill_references_are_self_contained(self):
         validate_bundle()
@@ -108,6 +121,40 @@ class CheckpointTests(unittest.TestCase):
         (self.root / "SKILL.md").write_text("synthetic installed skill")
         with self.assertRaises(ValueError):
             checkpoint.workspace(self.root / "candidate")
+
+    def test_candidate_identity_cannot_be_changed_or_removed(self):
+        proposal = copy.deepcopy(self.blank)
+        proposal["candidate_id"] = "fictional-candidate-a"
+        saved = checkpoint.save(self.root, proposal, 0)
+        for replacement in ("fictional-candidate-b", None):
+            altered = copy.deepcopy(saved)
+            altered["candidate_id"] = replacement
+            with self.assertRaises(ValueError):
+                checkpoint.save(self.root, altered, 1)
+
+    def test_attempt_evidence_cannot_be_erased_after_resolution(self):
+        proposal = copy.deepcopy(self.blank)
+        proposal["jobs"]["fictional-job"] = {"stage": "HUMAN_REQUIRED", "attempts": [
+            {"id": "fictional-attempt", "destination": "https://employer.example.invalid/apply"}]}
+        saved = checkpoint.save(self.root, proposal, 0)
+        saved["jobs"]["fictional-job"]["attempts"] = []
+        with self.assertRaises(ValueError):
+            checkpoint.save(self.root, saved, 1)
+
+    def test_no_second_attempt_while_first_is_unresolved(self):
+        proposal = copy.deepcopy(self.blank)
+        proposal["jobs"]["fictional-job"] = {"stage": "UNRESOLVED", "attempts": [{"id": "first"}]}
+        saved = checkpoint.save(self.root, proposal, 0)
+        saved["jobs"]["fictional-job"]["attempts"].append({"id": "second"})
+        with self.assertRaises(ValueError):
+            checkpoint.save(self.root, saved, 1)
+
+    def test_duplicate_attempt_ids_are_rejected(self):
+        proposal = copy.deepcopy(self.blank)
+        proposal["jobs"]["fictional-job"] = {"stage": "SUBMITTING", "attempts": [
+            {"id": "same"}, {"id": "same"}]}
+        with self.assertRaises(ValueError):
+            checkpoint.save(self.root, proposal, 0)
 
 
 if __name__ == "__main__":

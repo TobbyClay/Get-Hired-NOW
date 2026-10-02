@@ -30,6 +30,8 @@ Follow up only for information needed now:
 - Actual location, work authorization and relocation preferences. Do not infer
   citizenship, authorization, demographic status or willingness to relocate.
 - Target roles, seniority, industries, exclusions and existing representation.
+  Derive adjacent families from verified responsibilities when broader search is
+  requested; do not require a familiar title or treat a stretch as a new credential.
 - Compensation minimum/target, currency, period, base/total, gross/net and desired
   employment arrangement. Separate an expectation from a hard floor.
 - Work arrangement, hours/timezones, travel, start date and notice period.
@@ -37,6 +39,9 @@ Follow up only for information needed now:
   supported experience absent from the CV.
 - Resume language, presentation and writing preferences. Omission of education
   or another fact is not permission to make a false denial.
+- Posting freshness, employer diversity, round goals and time limits when needed
+  for a full round. Distinguish a desired count from a hard cap. These are private
+  candidate choices, not values inherited from the skill or someone else's queue.
 
 Do not require protected-status or sensitive identity answers during generic setup.
 Collect sensitive facts only when the person chooses to supply them for a concrete
@@ -55,6 +60,12 @@ Inspect available tool capabilities. Ask which account/workspace to use only whe
 multiple plausible accounts or destinations exist. Keep tokens in the host's
 credential system, never state.json. Use private local tracking by default until
 the person chooses an external tracker and authorizes it.
+
+Record a stable private `candidate_id` and the identity/scope of each connected
+account. A workspace selected for a second candidate requires separate facts,
+originals, permissions, artifacts, queue, ledger and account verification. Public
+discovery needs only search criteria; do not transmit a CV or private answer bank
+to a discovery API just because it accepts arbitrary text.
 
 ## Persist what was supplied
 

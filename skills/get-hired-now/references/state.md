@@ -23,6 +23,11 @@ repository's fictional candidate into a real user's workspace.
   original resume reference/hash, `facts` (value/status/source), `target_roles`,
   location/work authorization, `salary_policy`, `constraints` and writing preferences.
   Missing supplied values stay null. Preserve evidence and corrections.
+- `candidate_id`: null before intake, then a stable private identifier. Bind this
+  workspace and account scopes to one candidate; never switch it to another person.
+- `search_policy`: candidate-selected families/source routes, employer diversity,
+  original-publication maximum (nullable), round goals and time limits with provenance.
+  These optional fields extend schema 1 without importing another person's defaults.
 - `permissions`: mode, auto_submit, action grants with scope/source, approvals.
 - `integrations`: current capability bindings from the integrations reference.
 - `jobs`: map keyed by stable employer plus exact requisition, or canonical official
@@ -31,10 +36,22 @@ repository's fictional candidate into a real user's workspace.
 - `events`: chronological event objects with timestamp, job/action ID, kind and
   concise evidence reference. Store actual sensitive values only where needed.
 - `next_actions`: resumable queue, blockers and responsible owner.
+- `rounds`: optional map by batch ID with requested scope, policy/candidate revisions,
+  start/end, selected families/routes, goal versus cap, stop reason, `elapsed_seconds`
+  and `active_seconds` (null when unmeasured). Preserve completed round records.
 
 Each job includes identity/source timestamps, quoted required/preferred/unclear
 requirements, candidate-evidence map, disposition, economics, preparation level,
 form feasibility/questions, artifact manifest, stage, attempts and receipts.
+Store publication date/kind/source separately from first-seen/update dates, policy
+decision and any exact-role exception. Account identity checks and required-answer
+sources precede transmission. A correction invalidates affected pending answers
+and QA; historical submitted artifacts/receipts remain intact.
+
+An attempt is an immutable reservation/transmission record with unique ID, owner,
+batch, destination, candidate revision and artifact hashes. Append outcomes/events
+instead of erasing or rewriting the reservation. Keep final Submit distinct from
+data entry/upload, and retain all attempts even after resolution.
 
 Use stage values `DISCOVERED`, `EVALUATED`, `HUMAN_REQUIRED`, `REJECTED`, `RESEARCHED`,
 `TAILORED`, `READY_FOR_REVIEW`, `APPROVED`, `SUBMITTING`, `SUBMITTED`, `UNRESOLVED`,
@@ -81,3 +98,35 @@ Without Python, use the host's durable file tools with a single writer and atomi
 replacement where supported. Without durable storage, provide a downloadable
 checkpoint and disclose that automatic crash-safe external execution is unavailable;
 do not start autonomous submissions without durable attempt records.
+
+## Optional round report
+
+The read-only [report helper](../scripts/round_report.py) counts durable evidence
+references without contacting employers or importing the legacy framework:
+
+```sh
+python <skill-path>/scripts/round_report.py --workspace <private-workspace> --batch <batch-id>
+```
+
+To use it, persist batch events with `batch_id`, `job_key`, `kind`, `evidence` and
+optional `source_lane`/`role_family`. Event kinds are `lead_observed`,
+`posting_screened`, `role_qualified`, `role_conditional`, `packet_prepared`,
+`submission_ready`, `submit_clicked` and `attempt_result`. An attempt-result event
+also has `outcome` and optional `reason`. `role_blocked` records pre-submit blockers
+with `reason`; `blocker_resolved` clears one on new evidence. Record each raw sighting
+once; repeat milestone events count only one exact role. These are milestones
+reached during the batch, not the current ready-buffer size. Do not create events
+for unperformed work. `packet_prepared`
+requires the actual reviewed artifact/QA; `submit_clicked` requires final Submit.
+
+Accepted receipts contain `job_key`, `outcome: accepted`, `evidence` and
+`confirmed_in_batch`. Count a late confirmation in the batch where it was observed,
+identifying it as a prior attempt only when earlier final-Submit evidence exists.
+Without a recorded current or prior final Submit, its submission cohort stays unknown.
+An accepted outcome label without a matching receipt does not count. Per-role last
+attempt-result events provide failed/security outcomes; absent decisive outcomes
+remain unresolved. The helper projects supplied records and cannot authenticate
+an employer, verify an evidence file's contents or prove that an AI performed QA.
+Coverage counts are unique roles per lane/family, so overlapping source sightings
+are not additive. Rates use all confirmations observed in this batch; use
+`confirmed_from_current_submits` to distinguish fresh acceptance from reconciliation.

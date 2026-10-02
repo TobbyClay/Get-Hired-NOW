@@ -5,13 +5,15 @@ User's conversation + explicitly supplied original CV
                     |
                AI loads SKILL.md
                     |
-        onboard -> discover -> evaluate -> research
+        onboard -> family/source plan -> live discovery
                     |
-          tailor actual files -> review/authorize
+        official screen -> fit + pay + early form preflight
                     |
-       real host browser/application tools -> receipt
+        proportionate fresh packets -> review/standing scope
                     |
-         private state + tracking + authorized follow-up
+        real host application tools -> exact-role receipts
+                    |
+        private carryover + measured rounds + recruiting cohorts
 ```
 
 The user's AI is the executor. SKILL.md supplies routing and operating rules;
@@ -30,6 +32,12 @@ The optional self-contained checkpoint helper provides lock/revision checks, ato
 replacement and basic invariants such as preserving receipts and requiring evidence
 for acceptance. It does not perform search or submission. It does not authenticate
 consent or sandbox an AI with arbitrary filesystem access.
+
+The optional round-report helper projects per-batch evidence references into unique
+stage counts and measured rates. It distinguishes transmission from final Submit,
+old attempts from newly observed receipts, and elapsed from active time. It cannot
+verify evidence contents or perform any external action. Existing schema-1 states
+remain usable; candidate ID, search policy and rounds are additive optional fields.
 
 ## Replaceable integrations
 

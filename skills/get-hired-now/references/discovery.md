@@ -7,10 +7,20 @@ requested batch boundary. Use actual web/search/job-source tools. Search the cho
 sources and official employer career pages; follow promising listings to the
 official requisition. Do not manufacture a jobs.json requirement for the user.
 
+For broad rounds use [rounds](rounds.md) to map candidate-supported families and
+source coverage. Search both title synonyms and work/problems. A credible adjacent
+role or stretch can qualify from transferable evidence; a perfect keyword match
+is unnecessary. Do not turn broadening into an unsupported new candidate skill.
+
 For each unique posting, save employer, title, requisition ID, canonical URL,
 source URL, actual hiring geography, arrangement, observation time, posting-date
 evidence and material requirement quotes. Distinguish initial publication from
 repost/update dates. “Remote” and an employer's country do not prove eligibility.
+Capture date kind and source: original publication, update/repost, first seen or
+unknown. Under a maximum-age policy, verify original exact-role publication before
+submission. Imports, discovery dates and a refreshed old requisition do not reset
+age. Unknown/conflicting dates stay conditional under that policy; continue other
+roles. With no maximum, record age without imposing another candidate's limit.
 For live application work, confirm open status and identity before investing in
 tailored materials. If the person explicitly requests local tailoring against a
 supplied posting and live tools are unavailable, complete that supported work and
@@ -41,7 +51,18 @@ Missing evidence does not justify “the candidate has never done this.” Prefe
 gaps do not become mandatory failures. Do not add overlapping roles into extra
 years. Preserve contradictory geography and ask about material conflicts.
 
+Scouts/collectors return literal public requirements as `{quote, source, kind}`,
+where kind is required/preferred/unclear, with `candidate_evidence: unknown` and
+`disposition: unreviewed`. Fit review adds the concrete candidate claim, authoritative
+source, supported/partial/unknown/contradicted assessment and reasoning. Do not call
+discovery extraction qualification or a read-only worker's list prepared packets.
+Prefer detailed source evidence over a summary that merely omitted the skill.
+Keep employer/question-specific answers scoped; an answer to one screening field
+does not establish broader tenure, a completed credential or executive responsibility.
+
 ## Economics and research
+
+Use [salary research](salary.md) for comparable evidence and expectation decisions.
 
 Check the official posting for pay/arrangement and, when useful and accessible,
 compare a credible salary source. Separate employer budget, market estimate and

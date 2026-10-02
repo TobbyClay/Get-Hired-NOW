@@ -37,6 +37,8 @@ Then, for example:
 - "Prepare these applications for my review."
 - "Apply to the qualified roles in this batch under my saved authorization."
 - "Resume my saved search and reconcile the application receipts."
+- "Broaden my search into adjacent roles supported by my experience."
+- "Run a round for the next hour, use my saved authorization, and save carryover."
 
 The AI reads your supplied original CV using its document tools and asks only for
 missing or ambiguous information. It writes structured state itself; you do not
@@ -54,6 +56,30 @@ stay in a separate private workspace, never inside the installed skill.
 | Applications | Inspect real forms and use available browser/application tools for authorized actions; stop for human gates. |
 | Durable tracking | Save explicit state, attempts, artifacts and exact employer receipts; resume without guessing from conversation history. |
 | Follow-up | Draft and, only when separately authorized, send through the host's actual connected tools. |
+
+## Run a useful application pipeline
+
+The AI builds a search plan from your evidence and preferences, covers several
+role families and sources, and rotates away from stale duplicates. It checks the
+official role and form before extensive tailoring, then assigns proportionate
+preparation: no packet for a known blocker, a fresh copy using verified content
+when pay is unknown, or deeper tailoring when fit and economics justify it.
+
+On hosts with authorized subagents, scouts, fit review, salary research, writing
+and form inspection can work in independent slices. Completed roles move to the
+submission owner while discovery continues. One owner maintains shared records.
+The same workflow works sequentially when subagents are unavailable.
+
+Your application goal is a target unless you explicitly set a cap. The AI continues
+useful work within your scope and time limit, saves specific next actions, and
+reports actual source/family coverage and blockers. It distinguishes final Submit
+from uploads/autosaves, receipts from recruiter replies, and late reconciliation
+from newly submitted roles. Measured elapsed and active time stay separate.
+
+Freshness limits, pay floors, preferred lanes, account scope and authorization are
+collected from you. No installer's policy is copied into another candidate's search.
+See [rounds and carryover](skills/get-hired-now/references/rounds.md) and
+[salary research](skills/get-hired-now/references/salary.md).
 
 The AI can perform these operations only when its host supplies the needed tools
 and permissions. Without a browser, it prepares the documents and reports that
@@ -79,6 +105,11 @@ The skill keeps a private `state.json` with candidate facts, permissions, tool
 bindings, jobs, artifacts, attempts, receipts and next actions. A single record
 owner updates it. An optional checkpoint helper provides atomic writes and revision
 checks; native file/transaction tools can replace it.
+
+An optional read-only round-report helper summarizes recorded milestones and exact
+receipts without accessing an employer. It keeps duplicate sightings, uncertain
+attempts, late receipts and unknown time denominators distinct. Neither helper
+authenticates consent or evidence, and neither replaces the AI's host tools.
 
 Job sources, application providers, candidate storage, trackers, document rendering
 and notifications are capability interfaces bound to the AI's available tools.

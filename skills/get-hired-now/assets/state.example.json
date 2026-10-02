@@ -3,6 +3,8 @@
   "revision": 0,
   "updated_at": null,
   "candidate": null,
+  "candidate_id": null,
+  "search_policy": {},
   "permissions": {
     "mode": "REVIEW",
     "auto_submit": false,
@@ -12,5 +14,6 @@
   "integrations": {},
   "jobs": {},
   "events": [],
+  "rounds": {},
   "next_actions": []
 }
